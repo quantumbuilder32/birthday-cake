@@ -1,0 +1,344 @@
+*,
+*::before,
+*::after {
+    /* border: 1px solid red !important; */
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    height: 100vh;
+    align-items: center;
+    justify-items: center;
+    /* background-color: #f07167; */
+    overflow: hidden;
+}
+
+
+button {
+    background: #87ae73;
+    border: 1px solid #000;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.button:hover,
+.button:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #FF4742;
+}
+
+.button:active {
+    opacity: .5;
+}
+
+h1 {
+    font-size: 36px;
+    color: #87ae73;
+    text-align: center;
+}
+
+#message {
+    top: 0;
+    left: 50%;
+    translate: -50%;
+    padding: 1rem;
+    font-style: italic;
+    font-size: 24px;
+    color: #FF69B4;
+}
+
+.spawnPoints {
+    position: relative;
+    /* background-color: green; */
+}
+
+#spawnPoint,
+#spawnPointLeft,
+#spawnPointRight {
+    translate: -50% -50%;
+    user-select: none;
+    pointer-events: none;
+}
+
+#spawnPoint {
+    top: 0;
+    left: 50%;
+    width: 30%;
+    height: 60%;
+    z-index: 1;
+}
+
+#spawnPointLeft {
+    top: -60%;
+    left: 25%;
+    width: 25%;
+    height: 40%;
+}
+
+#spawnPointRight {
+    top: -100%;
+    left: 75%;
+    width: 30%;
+    height: 35%;
+}
+
+.og {
+    display: none;
+}
+
+#birthdayCakeCont {
+    position: relative;
+    top: 50px;
+    left: 0;
+}
+
+#birthdayCakeCont:before {
+    content: "";
+    position: absolute;
+    background-color: #ede0d4;
+    width: 400px;
+    height: 140px;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -10%);
+    box-shadow: inset -2px -5px #e6ccb2;
+}
+
+.cake {
+    position: absolute;
+    background-color: #ddb892;
+    width: 350px;
+    height: 130px;
+    transform: translate(-50%, -60%);
+}
+
+.cake:before,
+.cake:after {
+    content: "";
+    position: absolute;
+}
+
+.cake:before,
+.middle,
+.middle:before {
+    border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+    width: 350px;
+    height: 50px;
+}
+
+.cake:before {
+    background-color: #ddb892;
+    top: 130px;
+}
+
+.cake:after {
+    background-color: #b08968;
+    width: 350px;
+    height: 30px;
+    top: 50px;
+}
+
+.middle {
+    position: absolute;
+    background-color: #b08968;
+    top: 80px;
+    z-index: 1;
+}
+
+.middle:before {
+    content: "";
+    position: absolute;
+    background-color: #ddb892;
+    top: -35px;
+}
+
+.top {
+    position: absolute;
+    background-color: #7f5539;
+    width: 350px;
+    height: 90px;
+    border-radius: 50%;
+    z-index: 2;
+    top: -45px;
+    box-shadow: inset -5px -1px #fff, inset -70px 2px rgba(255, 255, 255, .1);
+}
+
+.chocs {
+    position: absolute;
+    width: 55px;
+    height: 50px;
+    background-color: #7f5539;
+    top: 0;
+    z-index: 1;
+    border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+    box-shadow: 49px 20px #7f5539, 98px 25px #7f5539, 147px 30px #7f5539, 196px 25px #7f5539, 245px 20px #7f5539, 295px 0 #7f5539, 0px 4px #fff, 49px 24px #fff, 98px 29px #fff, 147px 34px #fff, 196px 29px #fff, 245px 24px #fff, 295px 4px #fff;
+}
+
+.chocs:before {
+    content: "";
+    position: absolute;
+    width: 175px;
+    height: 180px;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 100% 0% 100% 0% / 0% 72% 28% 100%;
+    left: 175px;
+    top: 0;
+}
+
+.candle {
+    position: absolute;
+    width: var(--candleWidth);
+    height: var(--candleHeight);
+    background-color: #0081a7;
+    top: 0;
+    left: 0;
+    border-inline: 1px solid #4e4e4e;
+    opacity: 0;
+    scale: 0;
+    transform-origin: bottom;
+    animation: fadeIn 400ms var(--delayTime) forwards ease, bounce 1s var(--delayTime) forwards linear(0 0%, 0 2.27%, 0.02 4.53%, 0.04 6.8%, 0.06 9.07%, 0.1 11.33%, 0.14 13.6%, 0.25 18.15%, 0.39 22.7%, 0.56 27.25%, 0.77 31.8%, 1 36.35%, 0.89 40.9%, 0.85 43.18%, 0.81 45.45%, 0.79 47.72%, 0.77 50%, 0.75 52.27%, 0.75 54.55%, 0.75 56.82%, 0.77 59.1%, 0.79 61.38%, 0.81 63.65%, 0.85 65.93%, 0.89 68.2%, 1 72.7%, 0.97 74.98%, 0.95 77.25%, 0.94 79.53%, 0.94 81.8%, 0.94 84.08%, 0.95 86.35%, 0.97 88.63%, 1 90.9%, 0.99 93.18%, 0.98 95.45%, 0.99 97.73%, 1 100%);
+}
+
+.candle:before {
+    content: "";
+    position: absolute;
+    width: var(--candleWidth);
+    height: calc(var(--candleHeight) / 8);
+    background-color: #0081a7;
+    border-radius: 50%;
+    top: -5px;
+    box-shadow: 0 var(--candleHeight) #0081a7, inset 2px -1px #fff;
+}
+
+
+.shadow {
+    position: absolute;
+    width: var(--candleWidth);
+    height: calc(var(--candleHeight) / 8);
+    border-radius: 50%;
+    top: calc(var(--candleHeight) / -16);
+}
+
+.shadow:before {
+    content: "";
+    position: absolute;
+    background-color: #333;
+    width: calc(var(--candleWidth) / 29);
+    height: calc(var(--candleHeight) / 8);
+    left: 50%;
+    top: calc(var(--candleHeight) / -8);
+    translate: -50% 0;
+}
+
+
+
+.shadow:after {
+    content: "";
+    position: absolute;
+    width: calc(var(--candleWidth) / 2);
+    height: calc(var(--candleHeight) + 7px);
+    left: calc(var(--candleWidth) / 2);
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 0% 100% 50% 50% / 100% 6% 10% 0%;
+}
+
+
+.flame,
+.flame:before {
+    border-radius: 80% 15% 55% 50% / 55% 15% 80% 50%;
+    position: absolute;
+}
+
+.flame {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    transform: rotate(-45deg);
+    z-index: 4;
+    background-color: rgba(252, 191, 73, .8);
+    transition: .5s;
+    animation: flame .5s infinite;
+    top: calc(var(--candleHeight) / -2);
+    left: 50%;
+    translate: -50% 0;
+}
+
+.flame:before {
+    content: "";
+    background-color: rgba(247, 127, 0, .4);
+    width: 60%;
+    height: 60%;
+    top: 23%;
+    left: 18%;
+}
+
+
+
+
+.hide {
+    display: none !important;
+}
+
+.putFlameOut {
+    opacity: 1;
+    animation: putFlameOut 600ms forwards;
+}
+
+@keyframes flame {
+
+    0%,
+    25%,
+    100% {
+        transform: scaleY(1) rotate(-45deg);
+    }
+
+    50%,
+    75% {
+        transform: scaleY(1.1) rotate(-45deg);
+    }
+}
+
+
+@keyframes putFlameOut {
+    to {
+        opacity: 0
+    }
+}
+
+
+@keyframes fadeIn {
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    to {
+        scale: 1;
+    }
+}

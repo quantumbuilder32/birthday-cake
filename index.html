@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <script defer src="./index.js">
+    </script>
+</head>
+
+<body>
+    <div id="openingMessage" style="display: grid; gap: 1rem;">
+        <h1>DO YOU CARE ABOUT THE BUILDER?</h1>
+
+        <div style="display: flex;gap: 1rem;justify-content: center;">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+    </div>
+
+    <p id="message" style="position: fixed;"></p>
+
+    <div id="birthdayCakeCont" style="display: none;">
+        <div class="cake">
+            <div class="middle"></div>
+            <div class="chocs"></div>
+            <div class="top"></div>
+
+            <div style="z-index: 10; position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <div class="spawnPoints" id="spawnPoint"></div>
+                <div class="spawnPoints" id="spawnPointLeft"></div>
+                <div class="spawnPoints" id="spawnPointRight"></div>
+            </div>
+        </div>
+</body>
+
+</html>
