@@ -1,5 +1,10 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const numParam = urlParams.get('num') ? parseInt(urlParams.get('num')!) : 0;
+
 const spawnPoints = document.querySelectorAll(".spawnPoints") as NodeListOf<HTMLDivElement>
-const amtOfPoints = 19
+const spawnCont = document.querySelector("#spawnCont") as HTMLDivElement
+const amtOfPoints = numParam > 0 ? numParam : 19
 const amtOfSpawnPoints = spawnPoints.length
 const amtInEachSpawnPoint = Math.floor(amtOfPoints / amtOfSpawnPoints)
 const remainderAmtForMiddleSpawnPoint = amtOfPoints % amtOfSpawnPoints
@@ -12,13 +17,13 @@ let birthdayCakeCont = document.getElementById("birthdayCakeCont") as HTMLDivEle
 let yesButton = document.querySelector("#yes") as HTMLButtonElement;
 let noButton = document.querySelector("#no") as HTMLButtonElement;
 
+
 yesButton.addEventListener("click", yesClick);
 noButton.addEventListener("click", noClick);
 
 
-
 function start() {
-    const safeLocationPos: [HTMLDivElement, Number, number][] = getSafeLocationPos(spawnPoints, amtInEachSpawnPoint, remainderAmtForMiddleSpawnPoint)
+    const safePositions: [Number, number][] = getSafePositions(spawnPoints, amtInEachSpawnPoint, remainderAmtForMiddleSpawnPoint)
     const candles: HTMLDivElement[] = makeCandles(amtOfPoints)
 
     setTimeout(() => {
@@ -26,37 +31,77 @@ function start() {
     }, amtOfPoints * 100 + 1000);
 
 
-    safeLocationPos.forEach((eachLocationPos, eachLocationPosIndex) => {
-        addCandleToSpawnArea(candles[eachLocationPosIndex], eachLocationPos)
+    safePositions.forEach((eachPos, eachPosIndex) => {
+        addCandleToSpawnArea(candles[eachPosIndex], eachPos)
     })
 }
 
-function getSafeLocationPos(seenSpawnPoints: NodeListOf<HTMLDivElement>, seenAmtInEachSpawnPoint: number, seenRemainderAmtForMiddleSpawnPoint: number) {
-    const localSafeLocationPos: [HTMLDivElement, Number, number][] = []
+function findPercentageOf(num: number, maxNum: number) {
+    return (num / maxNum) * 100
+}
+
+function getSafePositions(seenSpawnPoints: NodeListOf<HTMLDivElement>, seenAmtInEachSpawnPoint: number, seenRemainderAmtForMiddleSpawnPoint: number) {
+    const localSafeLocationPos: [Number, number][] = []
+
 
     seenSpawnPoints.forEach((eachEl, eachElIndex) => {
         const amtToLoop = eachElIndex === 0 ? seenAmtInEachSpawnPoint + seenRemainderAmtForMiddleSpawnPoint : seenAmtInEachSpawnPoint
 
-        for (let index = 0; index < amtToLoop; index++) {
-            const randomX = Math.floor(Math.random() * 101)
-            const randomY = Math.floor(Math.random() * 101)
+        const maxWidth = spawnCont.clientWidth
+        const maxHeight = spawnCont.clientHeight
 
-            localSafeLocationPos.push([eachEl, Math.floor(randomX), Math.floor(randomY)])
+        const elWidth = eachEl.clientWidth
+        const elHeight = eachEl.clientHeight
+
+        const xOffset = eachEl.offsetLeft
+        const yOffset = eachEl.offsetTop
+
+        const lowerLeftRange = xOffset
+        const higherLeftRange = xOffset + elWidth
+        const lowerTopRange = yOffset
+        const higherTopRange = yOffset + elHeight
+
+
+        for (let index = 0; index < amtToLoop; index++) {
+
+            const randXPos = Math.floor(Math.random() * (higherLeftRange - lowerLeftRange)) + lowerLeftRange
+            const randYPos = Math.floor(Math.random() * (higherTopRange - lowerTopRange)) + lowerTopRange
+
+            const randomXPerc = Math.floor(findPercentageOf(randXPos, maxWidth))
+            const randomYPerc = Math.floor(findPercentageOf(randYPos, maxHeight))
+
+
+            // console.log(`$maxWidth`, maxWidth);
+            // console.log(`$maxHeight`, maxHeight);
+
+            // console.log(`$xOffset`, xOffset);
+            // console.log(`$yOffset`, yOffset);
+
+            // console.log(`$higherLeftRange`, higherLeftRange);
+            // console.log(`$higherTopRange`, higherTopRange);
+
+            // console.log(`$randXPos`, randXPos);
+            // console.log(`$randYPos`, randYPos);
+
+            // console.log(`$randomXPerc`, randomXPerc);
+            // console.log(`$randomYPerc`, randomYPerc);
+
+
+            localSafeLocationPos.push([randomXPerc, randomYPerc])
         }
     })
 
     return localSafeLocationPos
 }
 
-function addCandleToSpawnArea(candle: HTMLDivElement, locationPos: [HTMLDivElement, Number, number]) {
-    candle.style.left = `${locationPos[1]}%`
-    candle.style.top = `${locationPos[2]}%`
+function addCandleToSpawnArea(candle: HTMLDivElement, locationPos: [Number, number]) {
+    candle.style.left = `${locationPos[0]}%`
+    candle.style.top = `${locationPos[1]}%`
 
     candle.style.translate = `-50% -100%`
 
-    const additionalZ = locationPos[0].id === "spawnPoint" ? 10 : 0
-    candle.style.zIndex = `${locationPos[2] + additionalZ}`
-    locationPos[0].appendChild(candle)
+    candle.style.zIndex = `${10 + locationPos[1]}`
+    spawnCont.appendChild(candle)
 }
 
 function makeCandles(amtToMake: number) {

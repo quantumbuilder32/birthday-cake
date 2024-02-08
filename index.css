@@ -69,39 +69,47 @@ h1 {
     color: #FF69B4;
 }
 
+#spawnCont {
+    position: absolute;
+    top: -35%;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    z-index: 10;
+}
+
 .spawnPoints {
-    position: relative;
+    position: absolute;
     /* background-color: green; */
 }
 
 #spawnPoint,
 #spawnPointLeft,
 #spawnPointRight {
-    translate: -50% -50%;
     user-select: none;
     pointer-events: none;
 }
 
 #spawnPoint {
-    top: 0;
-    left: 50%;
-    width: 30%;
-    height: 60%;
+    top: 12%;
+    left: 26%;
+    width: 48%;
+    height: 78%;
     z-index: 1;
 }
 
 #spawnPointLeft {
-    top: -60%;
-    left: 25%;
-    width: 25%;
-    height: 40%;
+    top: 23%;
+    left: 10%;
+    width: 17%;
+    height: 50%;
 }
 
 #spawnPointRight {
-    top: -100%;
-    left: 75%;
-    width: 30%;
-    height: 35%;
+    top: 26%;
+    left: 73%;
+    width: 18%;
+    height: 50%;
 }
 
 .og {
